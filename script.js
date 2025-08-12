@@ -1,68 +1,52 @@
-// ----------------------
-// DevOps Terminal Typing Effect
-// ----------------------
 document.addEventListener("DOMContentLoaded", () => {
-  const terminal = document.querySelector(".terminal");
-  
-  // Text lines to simulate terminal commands
-  const commands = [
-    "Initializing CI/CD Pipeline...",
-    "Cloning repository from GitHub...",
-    "Building Docker image: abdulrahman/devops-app:latest",
-    "Running Kubernetes deployment script...",
-    "Scaling microservices...",
-    "Running post-deployment tests...",
-    "✅ All systems operational. Deployment successful!"
-  ];
+    const terminal = document.getElementById("terminal");
+    const cursor = document.createElement("span");
+    cursor.classList.add("cursor");
+    terminal.appendChild(cursor);
 
-  let cmdIndex = 0;
-  let charIndex = 0;
-  let currentLine = "";
+    const commands = [
+        "Initializing CI/CD Pipeline...",
+        "Pulling latest code from main branch...",
+        "Building Docker image: abdulrahman/devops-portfolio:latest",
+        "Pushing image to Docker Hub...",
+        "Deploying to Kubernetes cluster...",
+        "Applying Terraform infrastructure changes...",
+        "Running Ansible playbooks...",
+        "Deployment successful! ✅"
+    ];
 
-  function typeCommand() {
-    if (cmdIndex < commands.length) {
-      if (charIndex < commands[cmdIndex].length) {
-        currentLine += commands[cmdIndex].charAt(charIndex);
-        terminal.innerHTML = `<span class="prompt">devops@server:~$</span> ${currentLine}<span class="cursor">|</span>`;
-        charIndex++;
-        setTimeout(typeCommand, 50);
-      } else {
-        charIndex = 0;
-        currentLine = "";
-        cmdIndex++;
-        setTimeout(typeCommand, 800); // Pause before next command
-      }
+    let cmdIndex = 0;
+    let charIndex = 0;
+    let typing = true;
+
+    function typeCommand() {
+        if (cmdIndex < commands.length) {
+            if (charIndex < commands[cmdIndex].length) {
+                cursor.insertAdjacentText("beforebegin", commands[cmdIndex][charIndex]);
+                charIndex++;
+                setTimeout(typeCommand, 50); // typing speed
+            } else {
+                cursor.insertAdjacentHTML("beforebegin", "\n");
+                cmdIndex++;
+                charIndex = 0;
+                setTimeout(typeCommand, 400); // delay before next command
+            }
+        } else {
+            typing = false;
+        }
     }
-  }
 
-  typeCommand();
-});
+    typeCommand();
 
-// ----------------------
-// Fade-In Animation on Scroll
-// ----------------------
-const fadeElements = document.querySelectorAll(".fade-in");
-
-function handleScroll() {
-  fadeElements.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      el.classList.add("visible");
-    }
-  });
-}
-
-window.addEventListener("scroll", handleScroll);
-handleScroll();
-
-// ----------------------
-// Smooth Scroll Navigation
-// ----------------------
-document.querySelectorAll('.nav a[href^="#"]').forEach(link => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
+    // Fade-in animation on scroll
+    const fadeElements = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
     });
-  });
+
+    fadeElements.forEach(el => observer.observe(el));
 });
