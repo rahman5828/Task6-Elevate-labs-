@@ -1,0 +1,186 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background-color: #0d1117;
+  color: #c9d1d9;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 5%;
+  background: rgba(13, 17, 23, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.logo span {
+  color: #58a6ff;
+}
+
+.nav a {
+  margin: 0 0.8rem;
+  text-decoration: none;
+  color: #c9d1d9;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #58a6ff;
+}
+
+/* Hero Section with Parallax Background */
+.hero {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.85)), 
+              url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  text-align: center;
+  padding: 0 10%;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+}
+
+.highlight {
+  color: #58a6ff;
+}
+
+.hero-content p {
+  margin: 1rem 0 2rem;
+  color: #8b949e;
+  min-height: 24px;
+}
+
+/* Button Glow Effect */
+.btn {
+  display: inline-block;
+  background: #58a6ff;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 0 rgba(88, 166, 255, 0);
+}
+
+.btn:hover {
+  background: #1f6feb;
+  box-shadow: 0 0 15px rgba(88, 166, 255, 0.8);
+}
+
+/* About Section */
+.about {
+  padding: 4rem 10%;
+  background: #161b22;
+}
+
+.about h2 {
+  margin-bottom: 1rem;
+  color: #58a6ff;
+}
+
+/* Projects Section */
+.projects {
+  padding: 4rem 10%;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: #161b22;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  background: #1c2128;
+}
+
+/* Contact Section */
+.contact {
+  padding: 4rem 10%;
+  background: #161b22;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact input,
+.contact textarea {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #0d1117;
+  color: #c9d1d9;
+}
+
+.contact button {
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: #0d1117;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+}
