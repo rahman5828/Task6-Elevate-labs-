@@ -1,52 +1,61 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const terminal = document.getElementById("terminal");
-    const cursor = document.createElement("span");
-    cursor.classList.add("cursor");
-    terminal.appendChild(cursor);
+// Typing effect for the DevOps terminal
+const terminalLines = [
+  "🚀 Initializing DevOps pipeline...",
+  "🔍 Checking infrastructure with Terraform...",
+  "🐳 Building Docker images...",
+  "📦 Deploying containers to Kubernetes...",
+  "🔧 Configuring with Ansible...",
+  "⚙️ Running CI/CD pipeline in Jenkins...",
+  "✅ Deployment successful! 🚀"
+];
 
-    const commands = [
-        "Initializing CI/CD Pipeline...",
-        "Pulling latest code from main branch...",
-        "Building Docker image: abdulrahman/devops-portfolio:latest",
-        "Pushing image to Docker Hub...",
-        "Deploying to Kubernetes cluster...",
-        "Applying Terraform infrastructure changes...",
-        "Running Ansible playbooks...",
-        "Deployment successful! ✅"
-    ];
+let terminal = document.querySelector(".terminal");
+let cursor = document.createElement("span");
+cursor.className = "cursor";
+cursor.textContent = " ";
+terminal.appendChild(cursor);
 
-    let cmdIndex = 0;
-    let charIndex = 0;
-    let typing = true;
+let lineIndex = 0;
+let charIndex = 0;
 
-    function typeCommand() {
-        if (cmdIndex < commands.length) {
-            if (charIndex < commands[cmdIndex].length) {
-                cursor.insertAdjacentText("beforebegin", commands[cmdIndex][charIndex]);
-                charIndex++;
-                setTimeout(typeCommand, 50); // typing speed
-            } else {
-                cursor.insertAdjacentHTML("beforebegin", "\n");
-                cmdIndex++;
-                charIndex = 0;
-                setTimeout(typeCommand, 400); // delay before next command
-            }
-        } else {
-            typing = false;
-        }
+function typeLine() {
+  if (lineIndex < terminalLines.length) {
+    if (charIndex < terminalLines[lineIndex].length) {
+      cursor.insertAdjacentText("beforebegin", terminalLines[lineIndex][charIndex]);
+      charIndex++;
+      setTimeout(typeLine, 50);
+    } else {
+      terminal.appendChild(document.createElement("br"));
+      lineIndex++;
+      charIndex = 0;
+      setTimeout(typeLine, 500);
     }
+  }
+}
 
-    typeCommand();
+typeLine();
 
-    // Fade-in animation on scroll
-    const fadeElements = document.querySelectorAll(".fade-in");
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-            }
-        });
+// Fade-in animation for sections
+const fadeElements = document.querySelectorAll(".fade-in");
+
+function handleScroll() {
+  fadeElements.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", handleScroll);
+window.addEventListener("load", handleScroll);
+
+// Smooth scrolling for navigation
+document.querySelectorAll(".nav a").forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
     });
-
-    fadeElements.forEach(el => observer.observe(el));
+  });
 });
