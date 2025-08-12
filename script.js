@@ -1,42 +1,46 @@
-// Typing effect in the terminal section
+// ----------------------
+// DevOps Terminal Typing Effect
+// ----------------------
 document.addEventListener("DOMContentLoaded", () => {
-  const terminal = document.querySelector(".terminal .text");
+  const terminal = document.querySelector(".terminal");
+  
+  // Text lines to simulate terminal commands
   const commands = [
     "Initializing CI/CD Pipeline...",
-    "Pulling latest code from GitHub...",
-    "Building Docker image...",
-    "Running automated tests...",
-    "Deploying to production server...",
-    "✅ Deployment successful!"
+    "Cloning repository from GitHub...",
+    "Building Docker image: abdulrahman/devops-app:latest",
+    "Running Kubernetes deployment script...",
+    "Scaling microservices...",
+    "Running post-deployment tests...",
+    "✅ All systems operational. Deployment successful!"
   ];
 
-  let commandIndex = 0;
+  let cmdIndex = 0;
   let charIndex = 0;
   let currentLine = "";
 
   function typeCommand() {
-    if (charIndex < commands[commandIndex].length) {
-      currentLine += commands[commandIndex].charAt(charIndex);
-      terminal.innerHTML = `<span class="prompt">devops@server:~$</span> ${currentLine}<span class="cursor">|</span>`;
-      charIndex++;
-      setTimeout(typeCommand, 50);
-    } else {
-      // Pause before typing the next command
-      setTimeout(() => {
-        commandIndex++;
-        if (commandIndex < commands.length) {
-          charIndex = 0;
-          currentLine = "";
-          typeCommand();
-        }
-      }, 800);
+    if (cmdIndex < commands.length) {
+      if (charIndex < commands[cmdIndex].length) {
+        currentLine += commands[cmdIndex].charAt(charIndex);
+        terminal.innerHTML = `<span class="prompt">devops@server:~$</span> ${currentLine}<span class="cursor">|</span>`;
+        charIndex++;
+        setTimeout(typeCommand, 50);
+      } else {
+        charIndex = 0;
+        currentLine = "";
+        cmdIndex++;
+        setTimeout(typeCommand, 800); // Pause before next command
+      }
     }
   }
 
   typeCommand();
 });
 
-// Fade-in animation for sections
+// ----------------------
+// Fade-In Animation on Scroll
+// ----------------------
 const fadeElements = document.querySelectorAll(".fade-in");
 
 function handleScroll() {
@@ -51,7 +55,9 @@ function handleScroll() {
 window.addEventListener("scroll", handleScroll);
 handleScroll();
 
-// Smooth scroll for nav links
+// ----------------------
+// Smooth Scroll Navigation
+// ----------------------
 document.querySelectorAll('.nav a[href^="#"]').forEach(link => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
