@@ -1,38 +1,62 @@
-// Fade-in animation
-const faders = document.querySelectorAll(".fade-in");
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
-  });
-}, { threshold: 0.2 });
-faders.forEach(fade => observer.observe(fade));
+// Typing effect in the terminal section
+document.addEventListener("DOMContentLoaded", () => {
+  const terminal = document.querySelector(".terminal .text");
+  const commands = [
+    "Initializing CI/CD Pipeline...",
+    "Pulling latest code from GitHub...",
+    "Building Docker image...",
+    "Running automated tests...",
+    "Deploying to production server...",
+    "✅ Deployment successful!"
+  ];
 
-// Terminal typing effect
-const skills = [
-  "docker --version",
-  "kubectl get pods",
-  "terraform plan",
-  "ansible-playbook deploy.yml",
-  "aws ec2 describe-instances",
-  "helm install my-app",
-  "jenkins build pipeline"
-];
-let i = 0;
-let charIndex = 0;
-let typingElement = document.getElementById("typing");
+  let commandIndex = 0;
+  let charIndex = 0;
+  let currentLine = "";
 
-function typeSkill() {
-  if (i < skills.length) {
-    if (charIndex < skills[i].length) {
-      typingElement.textContent += skills[i].charAt(charIndex);
+  function typeCommand() {
+    if (charIndex < commands[commandIndex].length) {
+      currentLine += commands[commandIndex].charAt(charIndex);
+      terminal.innerHTML = `<span class="prompt">devops@server:~$</span> ${currentLine}<span class="cursor">|</span>`;
       charIndex++;
-      setTimeout(typeSkill, 80);
+      setTimeout(typeCommand, 50);
     } else {
-      typingElement.textContent += "\n";
-      charIndex = 0;
-      i++;
-      setTimeout(typeSkill, 500);
+      // Pause before typing the next command
+      setTimeout(() => {
+        commandIndex++;
+        if (commandIndex < commands.length) {
+          charIndex = 0;
+          currentLine = "";
+          typeCommand();
+        }
+      }, 800);
     }
   }
+
+  typeCommand();
+});
+
+// Fade-in animation for sections
+const fadeElements = document.querySelectorAll(".fade-in");
+
+function handleScroll() {
+  fadeElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
 }
-typeSkill();
+
+window.addEventListener("scroll", handleScroll);
+handleScroll();
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav a[href^="#"]').forEach(link => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});

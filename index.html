@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abdul Rahman – DevOps Engineer</title>
+  <title>Abdul Rahman | DevOps Engineer</title>
   <link rel="stylesheet" href="style.css"/>
-  <script defer src="script.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
+  
   <!-- Header -->
   <header class="header">
     <div class="logo">Abdul <span>Rahman</span></div>
     <nav class="nav">
       <a href="#about">About</a>
-      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -23,39 +24,23 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content fade-in">
-      <h1>Automating the Future with <span class="highlight">DevOps</span></h1>
-      <p>Delivering scalable, secure, and automated infrastructure.</p>
-      <a href="#contact" class="btn">Let’s Collaborate</a>
+      <h1>Hi, I'm <span class="highlight">Abdul Rahman</span></h1>
+      <p>DevOps Engineer | AWS | Docker | Kubernetes | CI/CD Automation</p>
+      <a href="resume.pdf" class="btn" download>Download Resume</a>
     </div>
-    <div class="pipeline-animation">
-      <div class="stage">Code</div>
-      <div class="stage">Build</div>
-      <div class="stage">Test</div>
-      <div class="stage">Deploy</div>
+  </section>
+
+  <!-- Terminal Animation Section -->
+  <section class="terminal-section fade-in">
+    <div class="terminal">
+      <div class="text"></div>
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="about fade-in">
     <h2>About Me</h2>
-    <p>
-      I'm Abdul Rahman, a passionate DevOps Engineer specializing in building CI/CD pipelines, automating deployments, and ensuring reliable infrastructure for high-availability systems. My work revolves around bridging the gap between development and operations for seamless delivery.
-    </p>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="skills fade-in">
-    <h2>Skills</h2>
-    <div class="terminal">
-      <div class="terminal-header">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
-      <div class="terminal-body">
-        <pre id="typing"></pre>
-      </div>
-    </div>
+    <p>I’m a passionate DevOps Engineer specializing in automating infrastructure, improving CI/CD pipelines, and deploying scalable cloud applications. With expertise in AWS, Docker, Kubernetes, Terraform, and Ansible, I help teams deliver faster and more reliably.</p>
   </section>
 
   <!-- Projects Section -->
@@ -63,16 +48,16 @@
     <h2>Projects</h2>
     <div class="project-grid">
       <div class="project-card">
-        <h3>CI/CD Pipeline Automation</h3>
-        <p>End-to-end pipeline built with Jenkins, Docker, and Kubernetes for zero-downtime deployments.</p>
+        <h3>AWS Infrastructure Automation</h3>
+        <p>Provisioned scalable infrastructure on AWS using Terraform and Ansible, integrated with Jenkins for automated deployments.</p>
       </div>
       <div class="project-card">
-        <h3>Cloud Infrastructure on AWS</h3>
-        <p>Provisioned scalable and secure infrastructure using Terraform and AWS services.</p>
+        <h3>Kubernetes Microservices</h3>
+        <p>Deployed a microservices architecture with Docker & Kubernetes, using GitHub Actions for CI/CD automation.</p>
       </div>
       <div class="project-card">
-        <h3>Monitoring & Logging Stack</h3>
-        <p>Implemented ELK Stack and Prometheus-Grafana for system observability.</p>
+        <h3>Monitoring & Logging</h3>
+        <p>Implemented centralized monitoring with Prometheus and Grafana, and log management with ELK Stack.</p>
       </div>
     </div>
   </section>
@@ -80,18 +65,19 @@
   <!-- Contact Section -->
   <section id="contact" class="contact fade-in">
     <h2>Contact Me</h2>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send</button>
+    <form>
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
     </form>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    &copy; 2025 Abdul Rahman | DevOps Engineer
+    <p>© 2025 Abdul Rahman | DevOps Engineer</p>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
