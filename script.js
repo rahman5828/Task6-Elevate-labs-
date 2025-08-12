@@ -1,105 +1,38 @@
-<<<<<<< HEAD
-// Typewriter Effect
-const typewriterTexts = [
-  "DevOps Engineer",
-  "Cloud Infrastructure Specialist",
-  "Automation Enthusiast"
+// Fade-in animation
+const faders = document.querySelectorAll(".fade-in");
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, { threshold: 0.2 });
+faders.forEach(fade => observer.observe(fade));
+
+// Terminal typing effect
+const skills = [
+  "docker --version",
+  "kubectl get pods",
+  "terraform plan",
+  "ansible-playbook deploy.yml",
+  "aws ec2 describe-instances",
+  "helm install my-app",
+  "jenkins build pipeline"
 ];
-
-let typewriterIndex = 0;
+let i = 0;
 let charIndex = 0;
-const typewriterElement = document.getElementById("typewriter");
+let typingElement = document.getElementById("typing");
 
-function typeEffect() {
-  if (charIndex < typewriterTexts[typewriterIndex].length) {
-    typewriterElement.textContent += typewriterTexts[typewriterIndex].charAt(charIndex);
-    charIndex++;
-    setTimeout(typeEffect, 100);
-  } else {
-    setTimeout(eraseEffect, 1500);
+function typeSkill() {
+  if (i < skills.length) {
+    if (charIndex < skills[i].length) {
+      typingElement.textContent += skills[i].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeSkill, 80);
+    } else {
+      typingElement.textContent += "\n";
+      charIndex = 0;
+      i++;
+      setTimeout(typeSkill, 500);
+    }
   }
 }
-
-function eraseEffect() {
-  if (charIndex > 0) {
-    typewriterElement.textContent = typewriterTexts[typewriterIndex].substring(0, charIndex - 1);
-    charIndex--;
-    setTimeout(eraseEffect, 50);
-  } else {
-    typewriterIndex = (typewriterIndex + 1) % typewriterTexts.length;
-    setTimeout(typeEffect, 500);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", typeEffect);
-
-// Smooth fade-in effect for sections when scrolling
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-document.querySelectorAll('section').forEach(section => {
-  section.classList.add('fade-in');
-  observer.observe(section);
-});
-
-// Smooth scroll for nav links
-document.querySelectorAll('.nav a').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
-
-// Form submission effect
-const form = document.querySelector('form');
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Thanks for your message! I will get back to you soon.');
-  form.reset();
-});
-=======
-// Smooth fade-in effect for sections when scrolling
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-document.querySelectorAll('section').forEach(section => {
-  section.classList.add('fade-in');
-  observer.observe(section);
-});
-
-// Smooth scroll for nav links (extra polish)
-document.querySelectorAll('.nav a').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
-
-// Form submission effect (fake success message for now)
-const form = document.querySelector('form');
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Thanks for your message! I will get back to you soon.');
-  form.reset();
-});
->>>>>>> bfc309be5df80c591af29b58b6fdeb7558fff796
+typeSkill();
